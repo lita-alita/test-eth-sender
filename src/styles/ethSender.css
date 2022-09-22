@@ -1,0 +1,46 @@
+input {
+    width: 100%;
+    min-width: 10rem;
+    border: solid white 2px;
+    border-radius: 2rem;
+    background-color: #282c34;
+    color: white;
+    padding: 1rem;
+    margin: 0.2rem;
+    font-size: 1rem;
+}
+
+input:invalid {
+    background-color: #ff4860;
+    border: solid white 2px;
+}
+
+input:placeholder-shown {
+    background-color: #282c34; 
+}
+
+button {
+    width: 100%;
+    min-width: 10rem;
+    border-radius: 2rem;
+    color: #282c34;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    font-size: 1rem;
+}
+
+.ethSender {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    font-size: calc(10px + 1vmin);
+    color: white;
+}
+
+a:active {
+    color: white;
+}

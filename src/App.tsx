@@ -1,6 +1,7 @@
 import './App.css';
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import SenderEth from './components/ethSender';
+import { changeNetwork } from './scripts/changeNetwork';
 
 
 function App() {
@@ -24,53 +25,26 @@ function App() {
     }
   };
 
-  async function changeNetwork(){
-    const {ethereum} = window;
-    try {
-      await ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x4' }],
-      });
-    } catch (err:any) {
-      // This error code indicates that the chain has not been added to MetaMask.
-      if (err.code === 4902) {
-        try {
-          await ethereum.request({
-            method: 'wallet_addEthereumChain',
-            params: [
-              {
-                chainId: '0x4',
-                chainName: 'Rinkeby testnet',
-                rpcUrls: ['https://rinkeby.infura.io/v3/'],
-              },
-            ],
-          });
-        } catch (err) {
-          alert("Unknown error")
-        }
-      }
-      // handle other "switch" errors
-    }
-  };
-
   if (!isProv) {
     return (
       <div className="App">
-        <header className="App-header">
+        <p className="App-replacer">
           You need to install Metamask
-        </header>
+        </p>
       </div>
     )}
 
   return (
-    <>
-    {currentAccount == "" &&
-     <button onClick={connectMetamask}>Click to connect Metamask</button>
-    }
-    {currentAccount !== "" &&
-    <SenderEth/>
-    }
-    </>
+    <div className="App">
+      {currentAccount === "" &&
+      <button className="connectButton" onClick={connectMetamask}>
+        Click to connect Metamask
+      </button>
+      }
+      {currentAccount !== "" &&
+      <SenderEth/>
+      }
+    </div>
   )
 }
 

@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { ethers } from "ethers"
+import { useState } from 'react';
+import { ethers } from "ethers";
+import '../styles/ethSender.css';
 
 export default function SenderEth () {
     const [ethAmount, updEthAmount] = useState(0);
@@ -23,10 +24,12 @@ export default function SenderEth () {
         const sendedTx = await signer.sendTransaction(tx);
         console.log(sendedTx)
         const response = document.getElementById("returner");
-        response!.innerText = `Transaction sended. Hash: ${sendedTx.hash}`
+        response!.innerText = `Transaction sended. Click here to see it etherscan.`
+        response!.setAttribute("href", `https://rinkeby.etherscan.io/tx/${sendedTx.hash}`)
     }
+
     return (
-        <>
+        <div className='ethSender'>
             <input
                 type="number"
                 placeholder="Eth amount"
@@ -42,7 +45,7 @@ export default function SenderEth () {
                 onChange={(e => updEthAddress(e.target.value))}>
             </input>
             <button onClick={senderHandler}>Send</button>
-            <p id="returner"></p>
-        </>
+            <a href="" id="returner"></a>
+        </div>
     )
 }
