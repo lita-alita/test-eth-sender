@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import SenderEth from './components/ethSender';
+import { ethers } from "hardhat";
 
 test('renders send eth form', () => {
   render(<SenderEth />);
@@ -12,12 +13,14 @@ test('renders send eth form', () => {
 }); 
 
 test('test send eth form', () => {
-  const { ethers } = require("hardhat");
-  let addr1; 
-  let addr2;
- 
+  let addr; 
+
   (async function () {
-    [addr1, addr2] = await ethers.getSigners();
+    try {
+      addr = await ethers.getSigners()
+   } catch (e) {
+      console.log(e)
+    }
   })()
 
   render(<SenderEth />);
